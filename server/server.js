@@ -39,8 +39,10 @@ app.get("/get/all", async (req, res) => {
     let responseArr = [];
 
     response.forEach((doc) => {
-      responseArr.push(doc.data());
+      const newData = { ...doc.data(), id: doc.id };
+      responseArr.push(newData);
     });
+
     res.send(responseArr);
   } catch (err) {
     res.send(err);
@@ -61,14 +63,17 @@ app.get("/get/:id", async (req, res) => {
 app.put("/update", async (req, res) => {
   try {
     const id = req.body.id;
-    const userJson = {
-      email: req.body.email,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+    const productJson = {
+      name: req.body.name,
+      price: req.body.price,
+      urlImage: req.body.urlImage,
     };
 
-    const userRef = await db.collection("products").doc(id).update(userJson);
-    res.send(userRef);
+    const productRef = await db
+      .collection("products")
+      .doc(id)
+      .update(productJson);
+    res.send(productRef);
   } catch (err) {
     res.send(err);
   }
