@@ -1,0 +1,56 @@
+.modalContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: var(--blue-dark);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+.hide {
+  display: none;
+}
+
+.modalContainer form {
+  background-color: var(--purple-dark);
+  width: 36rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.modalContainer form label {
+  font-size: 1.5rem;
+  padding-bottom: 0.8rem;
+}
+.modalContainer form input {
+  border: none;
+  background-color: var(--purple);
+  border-bottom: 2px solid var(--blue-dark);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.modalContainer form input::placeholder {
+  color: var(--gray-200);
+}
+
+.modalContainer form button {
+  border: none;
+  background-color: var(--purple);
+  border-radius: 8px;
+  padding: 0.8rem 0;
+  transition: all 0.3s;
+}
+
+.modalContainer form button:hover {
+  background-color: aquamarine;
+  color: var(--blue);
+}

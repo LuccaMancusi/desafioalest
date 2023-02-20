@@ -1,0 +1,47 @@
+.card {
+  width: 14rem;
+  border-radius: 8px;
+  gap: 1.5rem;
+
+  padding-top: 1.5rem;
+
+  background-color: var(--purple-dark);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 1.5rem;
+  line-break: anywhere;
+}
+
+.card img {
+  height: 10rem;
+  border-radius: 50%;
+}
+
+.card .footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .footer button {
+  width: 49%;
+  background-color: var(--purple);
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 0;
+}
+
+.card .footer button:hover {
+  background-color: var(--purple-dark);
+}
