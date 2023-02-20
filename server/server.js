@@ -25,7 +25,6 @@ app.post("/create", async (req, res) => {
       urlImage: req.body.urlImage,
     };
     const response = await db.collection("products").add(productJson);
-    console.log(response);
     res.send(response);
   } catch (err) {
     res.send(err);
@@ -85,7 +84,14 @@ app.delete("/delete/:id", async (req, res) => {
       .collection("products")
       .doc(req.params.id)
       .delete();
-    res.send(response);
+    const newItems = await db.collection("products").get();
+    let responseArr = [];
+
+    newItems.forEach((doc) => {
+      const newData = { ...doc.data(), id: doc.id };
+      responseArr.push(newData);
+    });
+    res.send(responseArr);
   } catch (err) {
     res.send(err);
   }
