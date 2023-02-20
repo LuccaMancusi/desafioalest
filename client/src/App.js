@@ -5,7 +5,9 @@ import { Modal } from "./components/Modal";
 
 export function App() {
   const [data, setData] = useState([{}]);
-  const [show, setShow] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   function onCreateProduct(product) {
     const options = {
@@ -16,14 +18,29 @@ export function App() {
 
     fetch("/create", options).then((res) => {
       dataUpdate();
-      setShow(false);
+      setShowCreateModal(false);
+    });
+  }
+
+  function onUpdateProduct(product) {
+    const id = data[currentIndex].id;
+    const options = {
+      method: "PUT",
+      headers: new Headers({ "content-type": "application/json" }),
+      body: JSON.stringify({ ...product, id }),
+    };
+    console.log(options);
+    fetch("/update", options).then((res) => {
+      dataUpdate();
+      setShowUpdateModal(false);
     });
   }
 
   function onHideModal(e) {
     let target = e.target;
     if (target.id === "modal") {
-      setShow(false);
+      setShowCreateModal(false);
+      setShowUpdateModal(false);
     }
   }
 
@@ -33,6 +50,11 @@ export function App() {
       .then((res) => {
         setData(res);
       });
+  }
+
+  function openModal(product, index) {
+    setCurrentIndex(index);
+    setShowUpdateModal(true);
   }
 
   useEffect(() => {
@@ -60,7 +82,7 @@ export function App() {
           <button
             className={styles.button}
             onClick={() => {
-              setShow(true);
+              setShowCreateModal(true);
             }}
           >
             Adicionar
@@ -72,6 +94,7 @@ export function App() {
               <Card
                 index={index}
                 onDeleteProduct={deleteProduct}
+                openModal={openModal}
                 key={product.id}
                 name={product.name}
                 urlImage={product.urlImage}
@@ -82,10 +105,16 @@ export function App() {
         </ul>
       </div>
       <Modal
-        show={show}
+        show={showCreateModal}
         onHideModal={onHideModal}
         button="Adicionar"
         onCreateProduct={onCreateProduct}
+      />
+      <Modal
+        show={showUpdateModal}
+        onHideModal={onHideModal}
+        button="Atualizar"
+        onUpdateProduct={onUpdateProduct}
       />
     </>
   );

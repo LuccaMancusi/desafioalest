@@ -9,6 +9,7 @@ export function Modal({
   show,
   onHideModal,
   onCreateProduct,
+  onUpdateProduct,
 }) {
   const [object, setObject] = useState({ name, price, urlImage });
 
@@ -31,8 +32,11 @@ export function Modal({
   function createProduct(event) {
     event.preventDefault();
     onCreateProduct(object);
-    setObject({ name, price, urlImage });
-    console.log(object);
+  }
+
+  function updateProduct(event) {
+    event.preventDefault();
+    onUpdateProduct(object);
   }
 
   return (
@@ -41,7 +45,7 @@ export function Modal({
       className={show ? styles.modalContainer : styles.hide}
       id="modal"
     >
-      <form onSubmit={createProduct}>
+      <form onSubmit={button === "Adicionar" ? createProduct : updateProduct}>
         <label htmlFor="name">Nome do produto:</label>
         <input
           onChange={handleNameChange}
