@@ -4,7 +4,7 @@ Comecei o projeto dividindo entre apasta de servidor e a pasta do client.
 
 Pasta servidor: Node.js com express para a criação das api's executando o CRUD com o firestore
 
-Pasta client: React.js para fazer a interface com o user utilizando as api's do node
+Pasta client: React.js para fazer a interface com o user utilizando as api's do node.
 
 Rotas:
 
